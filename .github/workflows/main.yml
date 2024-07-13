@@ -29,4 +29,8 @@ jobs:
       - name: Build docker image
         run: docker build -t omaatheus/api-journey:${{ steps.generate_sha.outputs.sha }} .
 
-      
+      - name: Push image
+        run: |
+          docker push omaatheus/api-journey:${{ steps.generate_sha.outputs.sha }}
+          docker tag omaatheus/api-journey:${{ steps.generate_sha.outputs.sha }} omaatheus/api-journey:latest
+          docker push omaatheus/api-journey:latest
